@@ -15,7 +15,8 @@ public class EnrollmentProgress {
     private long id;
 
     @ManyToOne
-    private Enrollment enrollments;
+    @JoinColumn(name = "enrollment_id")
+    private Enrollment enrollment;
 
     private boolean completed;
 
@@ -26,9 +27,9 @@ public class EnrollmentProgress {
     public EnrollmentProgress() {
     }
 
-    public EnrollmentProgress(long id, Enrollment enrollments, boolean completed, LocalDateTime completedTime, LocalDateTime issueddate) {
+    public EnrollmentProgress(long id, Enrollment enrollment, boolean completed, LocalDateTime completedTime, LocalDateTime issueddate) {
         this.id = id;
-        this.enrollments = enrollments;
+        this.enrollment = enrollment;
         this.completed = completed;
         this.completedTime = completedTime;
         this.issueddate = issueddate;
@@ -38,19 +39,19 @@ public class EnrollmentProgress {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         EnrollmentProgress that = (EnrollmentProgress) o;
-        return id == that.id && completed == that.completed && Objects.equals(enrollments, that.enrollments) && Objects.equals(completedTime, that.completedTime) && Objects.equals(issueddate, that.issueddate);
+        return id == that.id && completed == that.completed && Objects.equals(enrollment, that.enrollment) && Objects.equals(completedTime, that.completedTime) && Objects.equals(issueddate, that.issueddate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, enrollments, completed, completedTime, issueddate);
+        return Objects.hash(id, enrollment, completed, completedTime, issueddate);
     }
 
     @Override
     public String toString() {
         return "EnrollmentProgress{" +
                 "id=" + id +
-                ", enrollments=" + enrollments +
+                ", enrollments=" + enrollment +
                 ", completed=" + completed +
                 ", completedTime=" + completedTime +
                 ", issueddate=" + issueddate +

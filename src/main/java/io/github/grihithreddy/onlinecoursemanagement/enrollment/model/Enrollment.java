@@ -13,22 +13,21 @@ public class Enrollment {
 
        @Id
        @GeneratedValue(strategy = GenerationType.IDENTITY)
-       @NotBlank(message = "id is required")
        private long id;
 
-       @Id
+
        @Column(nullable = false)
        @NotBlank(message="user id is required")
        private String userId;
 
-      @Id
+
       @Column(nullable = false)
       @NotBlank(message="user name is required")
        private String username;
 
-      @Id
+
        @Column(nullable = false)
-       @Size(min=10,max=100)
+       @Size(min=1,max=100)
        @NotBlank(message="courseId is required")
        private String courseId;
 
@@ -38,7 +37,6 @@ public class Enrollment {
        private String courseName;
 
        @Column(nullable = false)
-       @NotBlank(message = "enrollmentdate is required")
        private LocalDateTime enrollmentTime;
 
        @Column(nullable = false)
@@ -48,6 +46,11 @@ public class Enrollment {
        @Column(nullable = false)
        @Size(min=10,max=100)
        private String description;
+
+       @PrePersist
+    protected void onCreate() {
+        this.enrollmentTime = LocalDateTime.now();
+    }
 
     public Enrollment() {
     }
