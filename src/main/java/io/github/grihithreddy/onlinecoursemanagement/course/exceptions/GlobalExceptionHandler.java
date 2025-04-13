@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     /**
-     * Handles ProductNotFoundException and returns a 404 Not Found response.
+     * Handles CourseNotFoundException and returns a 404 Not Found response.
      *
-     * @param exception The exception that was thrown (ProductNotFoundException).
+     * @param exception The exception that was thrown (CourseNotFoundException).
      * @return A ResponseEntity of ErrorResponse with error details.
      */
     @ExceptionHandler(value = CourseNotFoundException.class)
@@ -29,9 +29,9 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles ProductValidationException and returns a 400 Bad Request response.
+     * Handles CourseValidationException and returns a 400 Bad Request response.
      *
-     * @param exception The exception that was thrown (ProductValidationException).
+     * @param exception The exception that was thrown (CourseValidationException).
      * @return A ResponseEntity of ErrorResponse with error details.
      */
     @ExceptionHandler(value = CourseValidationException.class)
