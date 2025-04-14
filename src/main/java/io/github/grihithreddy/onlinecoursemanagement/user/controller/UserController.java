@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/usermanage")
 @Validated
 public class UserController {
 
@@ -33,7 +33,7 @@ public class UserController {
      * @return The created user with HTTP status 201 (Created)
      */
     @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody User user) {
         User created = userService.createUser(user);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -76,7 +76,7 @@ public class UserController {
     @PutMapping("/{id}/name")
     public ResponseEntity<User> updateUserName(
             @PathVariable @Positive int id,
-            @RequestParam @Size(min = 3, max = 50) String name
+            @RequestBody @Size(min = 3, max = 50) String name
     ) {
         User updated = userService.updateUserName(id, name);
         if (updated != null) {
@@ -96,7 +96,7 @@ public class UserController {
     @PutMapping("/{id}/email")
     public ResponseEntity<User> updateUserEmail(
             @PathVariable @Positive int id,
-            @RequestParam String email
+            @RequestBody String email
     ) {
         User updated = userService.updateUserEmail(id, email);
         if (updated != null) {
@@ -119,6 +119,17 @@ public class UserController {
             @RequestParam String password
     ) {
         User updated = userService.updateUserPassword(id, password);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    @PutMapping("/{id}/phone")
+    public ResponseEntity<User> updateUserPhone(
+            @PathVariable @Positive int id,
+            @RequestParam String phone
+    ) {
+        User updated = userService.updateUserPassword(id, phone);
         if (updated != null) {
             return ResponseEntity.ok(updated);
         }

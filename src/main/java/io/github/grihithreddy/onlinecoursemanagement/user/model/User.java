@@ -31,6 +31,7 @@ public class User {
     @NotBlank(message = "please provide ph no")
     private String phone;
 
+
     public User() {
     }
 
